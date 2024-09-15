@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="ar-auth-1" author="arfan" failOnError="false">
+        <comment>CREATE TABLE M_ROLE FOR MASTER DATA ROLE</comment>
+        <createTable tableName="M_ROLE">
+            <column name="ROLE_ID" type="varchar2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_M_ROLE" nullable="false" />
+            </column>
+            <column name="ROLE_ALIAS" type="varchar2(5)">
+                <constraints unique="true" nullable="false" uniqueConstraintName="UNIQUE_ROLE_ALIAS"/>
+            </column>
+            <column name="ROLE_NAME" type="varchar2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODIFIED_BY" type="VARCHAR2(20)"/>
+            <column name="MODIFIED_DATE" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
