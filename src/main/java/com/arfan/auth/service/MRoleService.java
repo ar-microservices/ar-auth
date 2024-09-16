@@ -9,4 +9,6 @@ import java.util.List;
 public interface MRoleService {
     MRoleResponseDTO save(MRoleRequest mRoleRequest) throws ParseException;
     List<MRoleResponseDTO> getAll();
+    MRoleResponseDTO findByRoleID(String roleID);
+    MRoleResponseDTO delete(String roleID);
 }

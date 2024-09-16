@@ -1,11 +1,14 @@
 package com.arfan.auth.service.impl;
 
+import ch.qos.logback.core.spi.ErrorCodes;
 import com.arfan.auth.dto.request.MRoleRequest;
 import com.arfan.auth.dto.response.MRoleResponseDTO;
 import com.arfan.auth.entity.MRoleEntity;
+import com.arfan.auth.enums.ErrorCode;
 import com.arfan.auth.mapper.MRoleMapper;
 import com.arfan.auth.repository.MRoleRepository;
 import com.arfan.auth.service.MRoleService;
+import org.hibernate.exception.DataException;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -42,6 +45,29 @@ public class MRoleServiceImpl implements MRoleService {
             mRoleResponseDTOS.add(mRoleResponseDTO);
         }
         return  mRoleResponseDTOS;
+    }
+
+    @Override
+    public MRoleResponseDTO findByRoleID(String roleID) {
+        try {
+            MRoleEntity mRoleEntity = mRoleRepository.findByRoleID(roleID);
+            if(mRoleEntity == null) {
+                throw new Exception("Could not find role");
+            }
+            return mRoleMapper.convertToDTO(mRoleEntity);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public MRoleResponseDTO delete(String roleID) {
+        MRoleEntity mRoleEntity = mRoleRepository.findByRoleID(roleID);
+        if(mRoleEntity == null) {
+            return  null;
+        }
+        mRoleRepository.delete(mRoleEntity);
+        return mRoleMapper.convertToDTO(mRoleEntity);
     }
 
 
