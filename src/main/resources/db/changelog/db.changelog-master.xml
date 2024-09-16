@@ -27,4 +27,9 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="ar-auth-2" author="arfan" failOnError="true">
+        <comment>INIT TABLE M_ROLE</comment>
+        <loadData tableName="M_ROLE" file="db/changelog/inittable/M_ROLE.csv"/>
+    </changeSet>
+
 </databaseChangeLog>
